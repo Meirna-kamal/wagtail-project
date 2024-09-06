@@ -1,0 +1,14 @@
+{% load wagtailimages_tags %}
+
+<div class="news-items">
+    {% for news in items %}
+        <div class="news-card">
+            {% image news.image fill-400x250 as img %}
+            <img src="{{ img.url }}" class="news-image">
+            <div class="news-body">
+                <h3 class="news-title">{{ news.title }}</h3>
+                <div class="news-text">{{ news.text }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

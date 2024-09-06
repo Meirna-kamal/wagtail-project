@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags i18n %}
+
+{% block language_selector %}
+<!-- Language Switcher Form -->
+    <form action="{% url 'set_language' %}" method="post" class="d-flex">
+        {% csrf_token %}
+        <div class="form-group me-2">
+            <select name="language" class="form-select">
+                {% for code, name in LANGUAGES %}
+                    <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">{% trans "Change" %}</button>
+    </form>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4 font-weight-bold">{% trans "Welcome to Our Home Page" %}</h1>
+            <p class="lead text-muted">{% trans "Explore our latest updates and features" %}</p>
+        </header>
+        
+        <section class="image-slider-section mb-5">
+            <h2 class="text-center mb-4">{% trans "Image Slider Section" %}</h2>
+            {% if images_block %}
+                {% include 'blocks/images_block.html' with block=images_block.value %}
+            {% else %}
+                <p class="lead text-muted">{% trans "No Images Available at the moment" %}</p>
+            {% endif %}
+        </section>
+        <hr>
+
+        <section class="vision-section mb-5 mt-5">
+            <h2 class="text-center mb-4">{% trans "Vision Section" %}</h2>
+            {% if vision_block %}
+                {% include_block vision_block %}
+            {% else %}
+                <p class="lead text-muted">{% trans "Vision Section not available at the moment" %}</p>
+            {% endif %}
+        </section>
+        <hr>
+
+        <section class="latest-news-section mb-5 mt-5">
+            <h2 class="text-center mb-4">{% trans "Latest News Section" %}</h2>
+            {% if news_block %}
+                {% include 'blocks/news_block.html' with items=news_block %}
+            {% else %}
+                <p class="lead text-muted">{% trans "Latest News not available at the moment" %}</p>
+            {% endif %}
+        </section>
+        <hr>
+    </div>
+{% endblock %}

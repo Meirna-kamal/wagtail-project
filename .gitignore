@@ -1,6 +1,29 @@
+# Virtual environment
 venv/
 
+# Python cache files
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.pyd
 
+# Database
 db.sqlite3
+
+# Media files
+/media/
+
+# Static files collected by collectstatic
+/static/
+
+# Django migrations
+*/migrations/*
+!*/migrations/__init__.py
+
+# Environment variable files
+.env
+.env.*
+
+# pytest
+.cache/

@@ -1,0 +1,33 @@
+{% load wagtailimages_tags %}
+
+<div id="carouselExampleIndicators" class="carousel slide mx-auto" style="max-width: 900px;">
+    <div class="carousel-indicators">
+        {% for _ in block %}
+            <button type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="{{ forloop.counter0 }}"
+                {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                aria-label="Slide {{ forloop.counter }}">
+            </button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">    
+        {% for image_block in block %}
+            {% with image=image_block.value %}
+                {% image image fill-800x400 as img %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ img.url }}" class="d-block w-100" style="max-height: 400px; object-fit: cover;">
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

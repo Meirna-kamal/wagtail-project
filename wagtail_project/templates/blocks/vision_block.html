@@ -1,0 +1,18 @@
+{% load wagtailimages_tags %}
+{% image self.image fill-800x400 as img %}
+
+<section class="vision-section mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="{{ img.url }}" class="d-block w-100" 
+                 style="max-height: 400px; object-fit: cover; width: 100%;">
+        </div>
+
+        <div class="col-md-6">
+            <div class="vision-content">
+                <h3 class="vision-title">{{ self.title }}</h3>
+                <p class="vision-text">{{ self.text }}</p>
+            </div>
+        </div>
+    </div>
+</section>
